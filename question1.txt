@@ -1,0 +1,45 @@
+    1  exit
+    2  exit
+    3  lab-configure 
+    4  cat /usr/local/etc/ocp4.config 
+    5  source /usr/local/etc/ocp4.config 
+    6  cat /usr/local/etc/ocp4.config 
+    7  oc login -u $RHT_OCP4_DEV_USER -p $RHT_OCP4_DEV_PASSWORD $RHT_OCP4_MASTER_API
+    8  oc whoami
+    9  oc new-project proj
+   10  oc get is -n openshift | grep nodejs
+   11  cat /usr/local/etc/ocp4.config 
+   12  oc new-app --name=pefcuv --as-deployment-config --build-env npm_config_registry=http://${RHT_OCP4_NEXUS_SERVER}/repository/nodejs nodejs:12~https://github.com/${RHT_OCP4_GITHUB_USER}/repo01
+   13  oc get pods
+   14  oc logs -f bc/pefcuv
+   15  oc delete all -l app=pefcuv
+   16  oc new-app --name=palenstine --as-deployment-config --build-env npm_config_registry=http://${RHT_OCP4_NEXUS_SERVER}/repository/nodejs nodejs:12~https://github.com/${RHT_OCP4_GITHUB_USER}/repo01
+   17  oc get pods
+   18  oc logs -f bc/pefcuv
+   19  oc logs -f bc/palnstine
+   20  oc logs -f bc/palenstine
+   21  cat /usr/local/etc/ocp4.config 
+   22  git clone https://github.com/${RHT_OCP4_GITHUB_USER}/repo01
+   23  cd repo01/
+   24  ls -l
+   25  python -m json.tool package.json
+   26  vim package.json 
+   27  git status
+   28  git add package.json
+   29  git status
+   30  git commit -m "package.json code correction done"
+   31  git push
+   32  vim package.json 
+   33  git add package.json
+   34  git commit -m "package.json code correction done"
+   35  git push
+   36  oc get pods
+   37  oc start-build palenstine 
+   38  oc logs -f bc/palenstine
+   39  oc get pods
+   40  oc expose svc palenstine 
+   41  oc get route
+   42  curl -v -k palenstine-proj.apps.na45.prod.nextcle.com
+   43  curl palenstine-proj.apps.na45.prod.nextcle.com
+   44  history 
+   45  history > question1.txt
